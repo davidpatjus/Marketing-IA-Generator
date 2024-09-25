@@ -1,6 +1,6 @@
-import Header from '@/components/Dashboard/Header';
-import SideNav from '@/components/Dashboard/SideNav';
 import React from 'react'
+import SideNav from '../../components/Dashboard/SideNav';
+import Header from '../../components/Dashboard/Header';
 
 function layout({ 
   children,
@@ -8,7 +8,7 @@ function layout({
   children?: React.ReactNode; 
 }>) {
   return (
-    <div>
+    <div className='bg-slate-100 h-full overflow-y-auto'>
       <div className='md:w-64 hidden md:block fixed'>
         <SideNav />
       </div>

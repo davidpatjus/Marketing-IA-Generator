@@ -8,22 +8,22 @@ function SideNav() {
 
   const MenuList= [
     {
-      name: 'Home',
+      name: 'Inicio',
       icon: Home,
       path: '/dashboard'
     },
     {
-      name: 'History',
+      name: 'Historial',
       icon: FileClock,
       path: '/dashboard/history'
     },
     {
-      name: 'Billing',
+      name: 'Facturación',
       icon: WalletCards,
       path: '/dashboard/billing'
     },
     {
-      name: 'Settings',
+      name: 'Configuración',
       icon: Settings,
       path: '/dashboard/settings'
     },
@@ -36,7 +36,7 @@ function SideNav() {
   }, [path])
 
   return (
-    <div className='h-screen p-5 shadow-sm border'>
+    <div className='h-screen p-5 shadow-sm border bg-white'>
 
       <div className='flex justify-center '>
         <Image src={'/logo.svg'} alt='logo' width={150} height={100} />
