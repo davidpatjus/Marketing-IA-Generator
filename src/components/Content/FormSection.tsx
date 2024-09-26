@@ -5,13 +5,15 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { Loader2Icon } from "lucide-react";
 
 interface PROPS {
   selectedTemplate?: TEMPLATE;
   userFormInput: any;
+  loading: boolean;
 }
 
-function FormSection({ selectedTemplate }: PROPS) {
+function FormSection({ selectedTemplate, userFormInput, loading }: PROPS) {
 
   const [formData, setFormData] = useState<any>();
 
@@ -21,14 +23,13 @@ function FormSection({ selectedTemplate }: PROPS) {
   };
 
   const onSubmit = (e:any) => {
-    e.prevent.default();
+    e.preventDefault();
     userFormInput(formData);
   };
 
   return (
     <div className="p-5 shadow-lg border rounded-lg bg-white h-max">
 
-      {/* @ts-ignore */}
       <Image
         src={selectedTemplate?.icon || ''}
         alt={selectedTemplate?.name || "Template Icon"}
@@ -51,7 +52,13 @@ function FormSection({ selectedTemplate }: PROPS) {
             ) : null}
           </div>
         ))}
-        <Button type="submit" className="w-full py-6">Generar Contenido</Button>
+        <Button 
+          type="submit" 
+          disabled={loading}
+          className="w-full py-6"
+        >
+          {loading ? <Loader2Icon className="animate-spin" /> : 'Generar Contenido'}
+        </Button>
       </form>
       
     </div>

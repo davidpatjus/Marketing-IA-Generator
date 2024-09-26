@@ -1,59 +1,59 @@
 const templates = [
   {
-    name: "Blog Title",
-    desc: "An AI tool that generate blog title depends on yout blog information",
+    name: "Título del Blog",
+    desc: "Una herramienta de IA que genera títulos de blog según la información de tu blog",
     category: "Blog",
     icon: "https://cdn-icons-png.flaticon.com/128/4186/4186534.png",
     aiPrompt:
-      "Give me 5 blog topic idea in bullet wise only based on give niche & outline and give me result in Rich text editor format",
-    slug: "generate-blog-title",
+      "Dame ideas de temas de blog basadas únicamente en el nicho y esquema proporcionado, y dame el resultado en formato de editor de texto enriquecido en formato de viñetas",
+    slug: "generar-titulo-blog",
     form: [
       {
-        label: "Enter your blog niche",
+        label: "Ingresa el nicho de tu blog",
         field: "input",
         name: "niche",
         required: true,
       },
       {
-        label: "Enter blog outline",
+        label: "Ingresa el esquema del blog",
         field: "textarea",
         name: "outline",
       },
     ],
   },
   {
-    name: "Blog Content",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    name: "Contenido de Blog",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
     category: "blog",
     icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
-    slug: "blog-content-generation",
+    slug: "generacion-contenido-blog",
     aiPrompt:
-      "Generate Blog Content based on topic and outline in rich text editor format",
+      "Generar contenido de blog basado en el tema y proporciona la salida en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter your blog topic",
+        label: "Ingresa el tema de tu blog",
         field: "input",
         name: "topic",
         required: true,
       },
       {
-        label: "Enter blog Outline here",
+        label: "Ingresa el esquema del blog aquí",
         field: "textarea",
         name: "outline",
       },
     ],
   },
   {
-    name: "Blog Topic Ideas",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    name: "Ideas de Temas para Blog",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
     category: "Blog",
     icon: "https://cdn-icons-png.flaticon.com/128/11497/11497847.png",
-    slug: "blog-topic-idea",
+    slug: "ideas-temas-blog",
     aiPrompt:
-      "Generate top 5 Blog Topic Ideas in bullet point only, (no Description) based on niche in rich text editor format",
+      "Genera las 5 mejores ideas de temas de blog en formato de viñetas (sin descripción) basadas en un nicho en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter your Niche",
+        label: "Ingresa tu Nicho",
         field: "input",
         name: "niche",
         required: true,
@@ -61,86 +61,82 @@ const templates = [
     ],
   },
   {
-    name: "Youtube SEO Title",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tools",
+    name: "Título SEO para YouTube",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
+    category: "Herramientas para YouTube",
     icon: "https://cdn-icons-png.flaticon.com/128/402/402075.png",
-    slug: "youtube-seo-title",
+    slug: "titulo-seo-youtube",
     aiPrompt:
-      "Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format",
+      "Dame las 5 mejores ideas de títulos SEO optimizados y bien rankeados en formato de viñetas basadas en palabras clave y esquema, y dame el resultado en formato de etiquetas HTML",
     form: [
       {
-        label: "Enter your youtube video topic keyowords",
+        label: "Ingresa las palabras clave del tema de tu video de YouTube",
         field: "input",
         name: "keywords",
         required: true,
       },
       {
-        label: "Enter youtube description Outline here",
+        label: "Ingresa el esquema de la descripción de YouTube aquí",
         field: "textarea",
         name: "outline",
       },
     ],
   },
   {
-    name: "Youtube Description",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tool",
+    name: "Descripción para YouTube",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
+    category: "Herramientas para YouTube",
     icon: "https://cdn-icons-png.flaticon.com/128/2111/2111748.png",
-    slug: "youtube-description",
+    slug: "descripcion-youtube",
     aiPrompt:
-      "Generate Youtube description with emoji under 4-5 lines based on topic and outline in rich text editor format",
+      "Genera una descripción de YouTube con emojis de 4-5 líneas basada en el tema y esquema en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter your blog topic/title",
+        label: "Ingresa el tema/título de tu blog",
         field: "input",
         name: "topic",
         required: true,
       },
       {
-        label: "Enter youtube Outline here",
+        label: "Ingresa el esquema de YouTube aquí",
         field: "textarea",
         name: "outline",
       },
     ],
   },
   {
-    name: "Youtube Tags",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
-    category: "Youtube Tool",
+    name: "Etiquetas para YouTube",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
+    category: "Herramientas para YouTube",
     icon: "https://cdn-icons-png.flaticon.com/128/4674/4674918.png",
-    slug: "youtube-tag",
-
+    slug: "etiquetas-youtube",
     aiPrompt:
-      "Generate 10 Youtube tags in bullet point based on title and outline in rich text editor format",
-
+      "Genera 10 etiquetas de YouTube en formato de viñetas basadas en el título y esquema en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter your youtube title",
+        label: "Ingresa el título de tu video de YouTube",
         field: "input",
         name: "title",
         required: true,
       },
       {
-        label: "Enter youtube video Outline here (Optional)",
+        label: "Ingresa el esquema de tu video de YouTube aquí (Opcional)",
         field: "textarea",
         name: "outline",
       },
     ],
   },
-
   {
-    name: "Rewrite Article (Plagiarism Free)",
-    desc: "Use this tool to rewrite existing Article or Blog Post which can bypass AI detectors and also make it plagiarism free.",
+    name: "Reescribir Artículo (Libre de Plagio)",
+    desc: "Usa esta herramienta para reescribir un artículo o publicación de blog existente que pueda evitar los detectores de IA y hacerlo libre de plagio.",
     icon: "https://cdn-icons-png.flaticon.com/128/3131/3131607.png",
-    category: "Rewriting Tool",
-    slug: "rewrite-article",
+    category: "Herramienta de Reescritura",
+    slug: "reescribir-articulo",
     aiPrompt:
-      "Rewrite give article without any Plagiarism in rich text editor format",
+      "Reescribe el artículo proporcionado sin ningún plagio en formato de editor de texto enriquecido",
     form: [
       {
-        label:
-          "🤖 Provide your Article/Blogpost or any other content to rewrite.",
+        label: "🤖 Proporciona tu Artículo/Publicación de Blog u otro contenido para reescribir.",
         field: "textarea",
         name: "article",
         required: true,
@@ -148,32 +144,32 @@ const templates = [
     ],
   },
   {
-    name: "Text Improver",
-    desc: "This handy tool refines your writing, eliminating errors and redundancies for a clear, readable result. It also offers a comprehensive tone analysis and suggests better word choices.",
+    name: "Mejorador de Texto",
+    desc: "Esta útil herramienta refina tu escritura, eliminando errores y redundancias para obtener un resultado claro y legible. También ofrece un análisis de tono y sugiere mejores opciones de palabras.",
     icon: "https://cdn-icons-png.flaticon.com/128/1686/1686815.png",
-    category: "Writing Assistant",
-    slug: "text-improver",
+    category: "Asistente de Escritura",
+    slug: "mejorador-texto",
     aiPrompt:
-      "Given textToImprove, Rewrite text without any grammar mistake and professionally in rich text editor format",
+      "Dado el texto a mejorar, reescribe el texto sin errores gramaticales y de forma profesional en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter text that you want to re-write or improve",
+        label: "Ingresa el texto que deseas reescribir o mejorar",
         field: "textarea",
         name: "textToImprove",
       },
     ],
   },
   {
-    name: "Add Emojis to Text",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    name: "Agregar Emojis al Texto",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
     icon: "https://cdn-icons-png.flaticon.com/128/2584/2584606.png",
     category: "blog",
-    slug: "add-emoji-to-text",
+    slug: "agregar-emojis-al-texto",
     aiPrompt:
-      "Add Emoji to outline text depends on outline and rewrite it in rich text editor format",
+      "Agrega emojis al texto del esquema según el esquema y reescríbelo en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter your text to add emojis",
+        label: "Ingresa tu texto para agregar emojis",
         field: "textarea",
         name: "outline",
         required: true,
@@ -181,17 +177,16 @@ const templates = [
     ],
   },
   {
-    name: "Instagram Post Generator",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    name: "Generador de Publicaciones de Instagram",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
     icon: "https://cdn-icons-png.flaticon.com/128/15713/15713420.png",
     category: "blog",
-
-    slug: "instagram-post-generator",
+    slug: "generador-publicaciones-instagram",
     aiPrompt:
-      "Generate 3 Instagram post depends on a given keywords and give output in  in rich text editor format",
+      "Genera 3 publicaciones de Instagram según las palabras clave dadas y da el resultado en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter Keywords for your post",
+        label: "Ingresa palabras clave para tu publicación",
         field: "input",
         name: "keywords",
         required: true,
@@ -199,17 +194,16 @@ const templates = [
     ],
   },
   {
-    name: "Instagram Hash Tag Generator",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    name: "Generador de Hashtags de Instagram",
+    desc: "Una herramienta de IA que actúa como tu redactor personal de títulos de blog, generando títulos llamativos y dignos de viralizar en el idioma de tu elección.",
     icon: "https://cdn-icons-png.flaticon.com/128/7045/7045432.png",
     category: "blog",
-
-    slug: "instagram-hash-tag-generator",
+    slug: "generador-hashtags-instagram",
     aiPrompt:
-      "Generate 15 Instagram hash tag depends on a given keywords and give output in  in rich text editor format",
+      "Genera 15 hashtags de Instagram basados en las palabras clave proporcionadas y da el resultado en formato de editor de texto enriquecido",
     form: [
       {
-        label: "Enter Keywords for your instagram hastag",
+        label: "Ingresa palabras clave para tus hashtags de Instagram",
         field: "input",
         name: "keywords",
         required: true,
@@ -217,143 +211,136 @@ const templates = [
     ],
   },
   {
-    name: "Instagram Post/Reel Idea",
-    desc: "An AI tool that generate New and trending instagram idea depends on your niche",
+    name: "Idea para publicación/reel de Instagram",
+    desc: "Una herramienta de IA que genera nuevas y populares ideas para Instagram según tu nicho",
     icon: "https://cdn-icons-png.flaticon.com/128/1029/1029183.png",
     category: "instagram",
-
-    slug: "instagram-post-idea-generator",
+    slug: "generador-ideas-publicacion-instagram",
     aiPrompt:
-      "Generate 5-10 Instagram idea depends on niche with latest trend and give output in  in rich text editor format",
+      "Genera entre 5-10 ideas de publicaciones de Instagram basadas en el nicho con las últimas tendencias, y da la salida en formato de editor de texto enriquecido.",
     form: [
       {
-        label: "Enter Keywords / Niche for your instagram idea",
+        label: "Introduce palabras clave / nicho para tu idea de Instagram",
         field: "input",
         name: "keywords",
         required: true,
       },
     ],
-  },
-  {
-    name: "English Grammer Check",
-    desc: "AI Model to Correct your english grammer by providing the text",
+},
+{
+    name: "Corrector de gramática en inglés",
+    desc: "Modelo de IA para corregir la gramática en inglés proporcionando el texto",
     icon: "https://cdn-icons-png.flaticon.com/128/12596/12596700.png",
     category: "english",
-
-    slug: "english-grammer-checker",
+    slug: "corrector-gramatica-ingles",
     aiPrompt:
-      "Rewrite the inputText by correcting the grammer and give output in  in rich text editor format",
+      "Reescribe el texto de entrada en ingles corrigiendo la gramática y proporciona la salida en formato de editor de texto enriquecido.",
     form: [
       {
-        label: "Enter text to correct the grammer",
+        label: "Introduce el texto para corregir la gramática",
         field: "input",
         name: "inputText",
         required: true,
       },
     ],
-  },
-  {
-    name: "Write Code",
-    desc: "AI Model to generate programming code in any language",
+},
+{
+    name: "Escribir código",
+    desc: "Modelo de IA para generar código de programación en cualquier lenguaje",
     icon: "https://cdn-icons-png.flaticon.com/128/6062/6062646.png",
     category: "Coding",
-
-    slug: "write-code",
+    slug: "generador-codigo",
     aiPrompt:
-      "Depends on user codeDescription write a code and give output in  in rich text editor format in code block ",
+      "Con base en la descripción proporcionada por el usuario, escribe un código y proporciona la salida en formato de editor de texto enriquecido en bloque de código.",
     form: [
       {
-        label: "Enter description of code you want along with Programming Lang",
+        label: "Introduce la descripción del código que deseas junto con el lenguaje de programación",
         field: "textarea",
-        name: "codeDesscripton",
+        name: "codeDescription",
         required: true,
       },
     ],
-  },
-  {
-    name: "Explain Code",
-    desc: "AI Model to explain programming code in any language",
+},
+{
+    name: "Explicar código",
+    desc: "Modelo de IA para explicar código de programación en cualquier lenguaje",
     icon: "https://cdn-icons-png.flaticon.com/128/8488/8488751.png",
     category: "Coding",
-
-    slug: "explain-code",
+    slug: "explicador-codigo",
     aiPrompt:
-      "Depends on user codeDescription explain code line by line and give output in  in rich text editor format in code block ",
+      "Con base en el código proporcionado por el usuario, explica el código línea por línea y proporciona la salida en formato de editor de texto enriquecido en bloque de código.",
     form: [
       {
-        label: "Enter code which you want to understand",
+        label: "Introduce el código que deseas entender",
         field: "textarea",
-        name: "codeDesscripton",
+        name: "codeDescription",
         required: true,
       },
     ],
-  },
-  {
-    name: "Code Bug Detector",
-    desc: "This tool analyzes your input, like error messages and code snippets, to pinpoint and fix bugs, offering detailed solutions and alternatives in a straightforward, user-friendly way.",
+},
+{
+    name: "Detector de errores de código",
+    desc: "Esta herramienta analiza la entrada, como mensajes de error y fragmentos de código, para identificar y corregir errores, ofreciendo soluciones detalladas y alternativas de forma clara y fácil de entender.",
     icon: "https://cdn-icons-png.flaticon.com/128/4426/4426267.png",
     category: "code-bug-detector",
-
-    slug: "code-bug-detector",
+    slug: "detector-bugs-codigo",
     aiPrompt:
-      "Depends on user codeInput find bug in code and give solution and give output in  in rich text editor format in code block ",
+      "Con base en el código proporcionado por el usuario, encuentra errores en el código y proporciona una solución en formato de editor de texto enriquecido en bloque de código.",
     form: [
       {
-        label: "Enter code which you want to test bug",
+        label: "Introduce el código que deseas probar en busca de errores",
         field: "textarea",
         name: "codeInput",
         required: true,
       },
     ],
-  },
-  {
-    name: "Tagline Generator",
-    desc: "Struggling to find the perfect tagline for your brand? Let our AI-tool assist you in creating a tagline that stands out.",
+},
+{
+    name: "Generador de eslóganes",
+    desc: "¿Te cuesta encontrar el eslogan perfecto para tu marca? Nuestra herramienta de IA te ayudará a crear un eslogan que destaque.",
     icon: "https://cdn-icons-png.flaticon.com/128/2178/2178616.png",
     category: "Marketting",
-
-    slug: "tagline-generator",
+    slug: "generador-esloganes",
     aiPrompt:
-      "Depends on user productName and outline generate catchy 5-10 tagline for the business product and give output  in rich text editor format ",
+      "Con base en el nombre del producto y el resumen proporcionado por el usuario, genera de 5 a 10 eslóganes atractivos para el producto o negocio y da la salida en formato de editor de texto enriquecido.",
     form: [
       {
-        label: "Product/Brand Name",
+        label: "Nombre del producto o marca",
         field: "input",
         name: "productName",
         required: true,
       },
       {
-        label: "What you are selling / Marketting",
+        label: "¿Qué estás vendiendo o promocionando?",
         field: "textarea",
         name: "outline",
         required: true,
       },
     ],
-  },
-  {
-    name: "Product Description",
-    desc: "This is your AI-powered SEO expert, creating captivating and keyword-rich e-commerce product descriptions to boost your online sales.",
+},
+{
+    name: "Descripción del producto",
+    desc: "Este es tu experto en SEO impulsado por IA, creando descripciones de productos para e-commerce cautivadoras y ricas en palabras clave para aumentar tus ventas en línea.",
     icon: "https://cdn-icons-png.flaticon.com/128/679/679922.png",
     category: "Marketting",
-
-    slug: "product-description",
+    slug: "generador-descripcion-producto",
     aiPrompt:
-      "Depends on user productName and description generate small description for product for e-commer business give output  in rich text editor format  ",
+      "Con base en el nombre y la descripción proporcionados por el usuario, genera una pequeña descripción del producto para e-commerce y proporciona la salida en formato de editor de texto enriquecido.",
     form: [
       {
-        label: "Product Name",
+        label: "Nombre del producto",
         field: "input",
         name: "productName",
         required: true,
       },
       {
-        label: "Product Details",
+        label: "Detalles del producto",
         field: "textarea",
         name: "outline",
         required: true,
       },
     ],
-  },
-];
+}
 
+];
 export default templates;
