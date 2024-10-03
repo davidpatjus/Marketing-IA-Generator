@@ -5,9 +5,13 @@ import OutputSection from '@/components/Content/OutputSection';
 import { TEMPLATE } from '@/components/Dashboard/TemplateSection';
 import { Button } from '@/components/ui/button';
 import { chatSession } from '@/utils/AiModal';
+import React, { useState } from 'react'
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import { db } from '@/utils/db';
+import { useUser } from '@clerk/nextjs';
+import moment from 'moment'
+import { AIOutput } from '@/utils/schema';
 
 interface PROPS{
     params: {
@@ -21,6 +25,7 @@ function CreateNewContent(props: PROPS) {
 
     const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
+    const { user } = useUser();
     
     const generateAIContent = async (formData: any) => {
       try {
@@ -37,6 +42,7 @@ function CreateNewContent(props: PROPS) {
   
         if (result.response.candidates && result.response.candidates.length > 0) {
           setAiOutput(result.response.candidates[0].content.parts[0].text || 'Error: No content found in the AI response.');
+          await saveInDb(JSON.stringify(formData), selectedTemplate?.slug, result.response.candidates[0].content.parts[0].text || 'Error: No content found in the AI response.');
         } else {
           console.error("No candidates found in the AI response.");
         }
@@ -45,6 +51,17 @@ function CreateNewContent(props: PROPS) {
       } finally {
         setLoading(false);
       }
+    }
+
+    const saveInDb = async (formData:any, slug:any, aiResp:string) => {
+      const result = await db.insert(AIOutput).values({
+        formData: formData,
+        templateSlug: slug,
+        aiResponse: aiResp,
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdAt: moment().format('DD/MM/yyyy'),
+      })
+      console.log(result);
     }
 
   return (
