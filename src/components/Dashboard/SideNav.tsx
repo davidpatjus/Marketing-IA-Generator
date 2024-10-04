@@ -1,5 +1,5 @@
 'use client'
-import { FileClock, Home, Settings, WalletCards } from 'lucide-react'
+import { Brain, FileClock, Home, Settings, WalletCards } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -40,9 +40,12 @@ function SideNav() {
   return (
     <div className='h-screen relative p-5 shadow-sm border bg-white'>
 
-      <div className='flex justify-center '>
-        <Image src={'/logo.svg'} alt='logo' width={150} height={100} />
-      </div>
+      <Link className="flex items-center justify-center" href="/">
+        <Brain className="h-6 w-6 text-primary" />
+        <span className="ml-2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+          AIMarketer
+        </span>
+      </Link>
       <hr className='my-6 border'/>
 
       <div className='mt-3'>
