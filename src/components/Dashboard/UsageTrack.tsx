@@ -23,7 +23,7 @@ import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
     const GetData = async () => {
         {/* @ts-expect-error err */}
         const result: HISTORY[] = await db.select().from(AIOutput)
-        .where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress));
+        .where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress || ''));
 
         GetTotalUsage(result)
     }
