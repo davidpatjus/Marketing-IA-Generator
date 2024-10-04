@@ -5,9 +5,9 @@ import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button'; // Asegúrate de tener este componente
 import Modal from '@/components/ui/Modal'; // Importar el nuevo componente Modal
 
-interface AIOutput {
+export interface HISTORY {
   id: number;
-  formData: any;
+  formData: string;
   aiResponse: string;
   templateSlug: string;
   createdBy: string;
@@ -15,7 +15,7 @@ interface AIOutput {
 }
 
 function History() {
-  const [aiOutputs, setAiOutputs] = useState<AIOutput[]>([]);
+  const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
   const [selectedResponse, setSelectedResponse] = useState<string | null>(null); // Para el modal
@@ -58,8 +58,8 @@ function History() {
 
   return (
     <div className="p-6 bg-white">
-      <h1 className="text-3xl font-bold">HISTORIAL</h1>
-      <h2 className="text-gray-800/60 text-lg">Busca entre tu contenido anterior generado</h2>
+      <h1 className="text-3xl font-bold ">HISTORIAL</h1>
+      <h2 className="text-gray-500 text-lg">Busca entre tu contenido anterior generado</h2>
       <table className="min-w-full table-auto mt-4">
         <thead>
           <tr className='bg-gray-100 border'>

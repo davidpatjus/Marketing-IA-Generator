@@ -5,13 +5,15 @@ import OutputSection from '@/components/Content/OutputSection';
 import { TEMPLATE } from '@/components/Dashboard/TemplateSection';
 import { Button } from '@/components/ui/button';
 import { chatSession } from '@/utils/AiModal';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { db } from '@/utils/db';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment'
 import { AIOutput } from '@/utils/schema';
+import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
+import { useRouter } from 'next/navigation';
 
 interface PROPS{
     params: {
@@ -26,8 +28,17 @@ function CreateNewContent(props: PROPS) {
     const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
+    const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
+    const router = useRouter();
     
     const generateAIContent = async (formData: any) => {
+
+      if (totalUsage >= 10000) {
+        alert("Has utilizado el maximo de creditos disponibles. Por favor, actualiza tu plan.");
+        router.push('/dashboard/billing');
+        return;
+      }
+
       try {
         setLoading(true);
   

@@ -22,7 +22,12 @@ function OutputSection( {aiOutput}: PROPS ) {
     <div className='bg-white shadow-lg border rounded-lg'>
       <div className='flex justify-between items-center p-5'>
         <h2 className='font-medium text-lg'>Tu Resultado</h2>
-        <Button className='flex gap-2'> <Copy className='w-4 h-4' /> Copiar </Button>
+        <Button className='flex gap-2' onClick={() => {
+          navigator.clipboard.writeText(editorRef.current.getInstance().getMarkdown());
+          alert('Copiado al portapapeles')
+          }}> 
+          <Copy className='w-4 h-4' /> Copiar 
+        </Button>
       </div>
       <Editor
         ref={editorRef}
