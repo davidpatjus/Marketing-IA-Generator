@@ -11,6 +11,7 @@ interface PROPS{
 
 function OutputSection( {aiOutput}: PROPS ) {
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorRef:any = useRef();
 
   useEffect(() => {

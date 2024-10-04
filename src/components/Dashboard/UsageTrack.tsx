@@ -15,7 +15,9 @@ import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
     const { totalUsage, setTotalUsage } = useContext(TotalUsageContext)
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         user && GetData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const GetData = async () => {

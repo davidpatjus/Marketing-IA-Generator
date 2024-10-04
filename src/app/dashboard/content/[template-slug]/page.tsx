@@ -28,9 +28,10 @@ function CreateNewContent(props: PROPS) {
     const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
-    const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
+    const { totalUsage } = useContext(TotalUsageContext);
     const router = useRouter();
     
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const generateAIContent = async (formData: any) => {
 
       if (totalUsage >= 10000) {
@@ -63,7 +64,7 @@ function CreateNewContent(props: PROPS) {
         setLoading(false);
       }
     }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const saveInDb = async (formData:any, slug:any, aiResp:string) => {
       const result = await db.insert(AIOutput).values({
         formData: formData,
@@ -88,6 +89,7 @@ function CreateNewContent(props: PROPS) {
           {/* FormSection */}
           <FormSection 
             selectedTemplate={selectedTemplate} 
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             userFormInput={(e:any) => generateAIContent(e)}
             loading={loading}
           />

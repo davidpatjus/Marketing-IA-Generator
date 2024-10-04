@@ -9,19 +9,22 @@ import { Loader2Icon } from "lucide-react";
 
 interface PROPS {
   selectedTemplate?: TEMPLATE;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userFormInput: any;
   loading: boolean;
 }
 
 function FormSection({ selectedTemplate, userFormInput, loading }: PROPS) {
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [formData, setFormData] = useState<any>();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleInputChange = (e:any) => {
     const { name, value } = e.target;
     setFormData({...formData, [name]: value});
   };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (e:any) => {
     e.preventDefault();
     userFormInput(formData);
