@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Brain, Lightbulb, Rocket, Zap, ChevronDown } from "lucide-react"
@@ -8,13 +8,13 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0)
+  // const [scrollY, setScrollY] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  // useEffect(() => {
+  //   const handleScroll = () => setScrollY(window.scrollY)
+  //   window.addEventListener("scroll", handleScroll)
+  //   return () => window.removeEventListener("scroll", handleScroll)
+  // }, [])
 
   return (
     <div className="flex flex-col min-h-screen overflow-auto">
