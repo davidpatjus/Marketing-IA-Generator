@@ -70,7 +70,7 @@ function CreateNewContent(props: PROPS) {
         formData: formData,
         templateSlug: slug,
         aiResponse: aiResp,
-        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdBy: user?.primaryEmailAddress?.emailAddress || 'Unknown',
         createdAt: moment().format('DD/MM/yyyy'),
       })
       console.log(result);
