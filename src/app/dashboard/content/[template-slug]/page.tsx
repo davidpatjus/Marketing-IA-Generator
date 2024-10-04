@@ -67,9 +67,9 @@ function CreateNewContent(props: PROPS) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const saveInDb = async (formData:any, slug:any, aiResp:string) => {
       const result = await db.insert(AIOutput).values({
-        formData: formData,
-        templateSlug: slug,
-        aiResponse: aiResp,
+        formData: formData || 'Error: No form data found.',
+        templateSlug: slug || 'Unknown',
+        aiResponse: aiResp || 'Error: No content found in the AI response.',
         createdBy: user?.primaryEmailAddress?.emailAddress || 'Unknown',
         createdAt: moment().format('DD/MM/yyyy'),
       })
