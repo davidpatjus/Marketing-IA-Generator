@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Loading from '@/components/ui/Loading';
-// import OutputSection from '@/components/Content/OutputSection';
+import OutputSection from '@/components/Content/OutputSection';
 
 export interface HISTORY {
   id: number;
@@ -102,8 +102,7 @@ function History() {
       </div>
 
       <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
-        { selectedResponse }
-      {/* <OutputSection aiOutput={selectedResponse || ''} />       */}
+      <OutputSection aiOutput={selectedResponse || ''} />      
       </div>
 
     </div>
