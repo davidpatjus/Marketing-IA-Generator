@@ -19,6 +19,7 @@ import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
 
 		useEffect(() => {
 			GetData()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		}, [totalUsage])
 
 		const GetData = async () => {

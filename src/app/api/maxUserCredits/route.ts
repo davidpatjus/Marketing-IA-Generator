@@ -34,6 +34,7 @@ export async function POST(request: Request) {
       // Si el usuario ya existe, devolverlo
       return NextResponse.json(existingUser[0], { status: 200 });
   
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Error en la operación:', error);
       return NextResponse.json({ error: 'Error obteniendo/creando usuario: ' + error.message }, { status: 500 });
