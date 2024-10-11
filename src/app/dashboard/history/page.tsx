@@ -39,13 +39,14 @@ function History() {
     fetchData();
   }, [user]);
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('Texto copiado al portapapeles!');
-    } catch (error) {
-      console.error('Error al copiar al portapapeles:', error);
-    }
+  const copyToClipboard = (text: string) => {
+    const tempTextArea = document.createElement("textarea");
+    tempTextArea.value = text;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempTextArea);
+    alert('Texto copiado al portapapeles!');
   };
 
   const handleResponseClick = (response: string) => {
