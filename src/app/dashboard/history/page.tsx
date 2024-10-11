@@ -40,18 +40,35 @@ function History() {
     fetchData();
   }, [user]);
 
-  const copyToClipboard = async (text: string) => {
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('Texto copiado al portapapeles!');
-      } catch (error) {
-        console.error('Error al copiar al portapapeles:', error);
-      }
-    } else {
-      console.error('Clipboard API no está disponible');
+  const copyToClipboard = (text: string) => {
+    try {
+      // Crear un elemento <textarea> temporal
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+  
+      // Evitar que el textarea sea visible
+      textArea.style.position = 'fixed';  // Evita el desplazamiento de la página
+      textArea.style.opacity = '0';
+  
+      // Agregar el <textarea> al DOM
+      document.body.appendChild(textArea);
+  
+      // Seleccionar el contenido del <textarea>
+      textArea.focus();
+      textArea.select();
+  
+      // Ejecutar el comando de copiar
+      document.execCommand('copy');
+  
+      // Eliminar el <textarea> del DOM
+      document.body.removeChild(textArea);
+  
+      alert('Texto copiado al portapapeles!');
+    } catch (error) {
+      console.error('Error al copiar al portapapeles:', error);
     }
   };
+  
 
   const handleResponseClick = (response: string) => {
     setSelectedResponse(response);
