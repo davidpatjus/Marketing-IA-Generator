@@ -1,8 +1,7 @@
-'use client'
+"use client";
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
-import Loading from '@/components/ui/Loading';
 import OutputSection from '@/components/Content/OutputSection';
 
 export interface HISTORY {
@@ -16,7 +15,6 @@ export interface HISTORY {
 
 function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
   const { user } = useUser();
 
@@ -30,8 +28,6 @@ function History() {
           setAiOutputs(data);
         } catch (error) {
           console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false);
         }
       }
     };
@@ -52,8 +48,6 @@ function History() {
     setSelectedResponse(response);
 
   };
-
-  if (loading) return <Loading />;
 
   return (
     <div className="p-4 sm:p-6 bg-slate-100">
