@@ -38,9 +38,17 @@ function OutputSection({ aiOutput }: PROPS) {
         <Button
           className="flex gap-2"
           onClick={() => {
-            navigator.clipboard.writeText(
-              editorRef.current.getInstance().getMarkdown()
-            );
+            const copyToClipboard = (text: string) => {
+              const tempTextArea = document.createElement("textarea");
+              tempTextArea.value = text;
+              document.body.appendChild(tempTextArea);
+              tempTextArea.select();
+              document.execCommand("copy");
+              document.body.removeChild(tempTextArea);
+              alert('Texto copiado al portapapeles!');
+            };
+
+            copyToClipboard(editorRef.current.getInstance().getMarkdown());
             alert('Copiado al portapapeles');
           }}
         >
