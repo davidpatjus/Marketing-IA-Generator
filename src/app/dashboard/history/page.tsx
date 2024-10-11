@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
-import OutputSection from '@/components/Content/OutputSection';
+import Loading from '@/components/ui/Loading';
+// import OutputSection from '@/components/Content/OutputSection';
 
 export interface HISTORY {
   id: number;
@@ -15,6 +16,7 @@ export interface HISTORY {
 
 function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
   const { user } = useUser();
 
@@ -28,6 +30,8 @@ function History() {
           setAiOutputs(data);
         } catch (error) {
           console.error('Error fetching data:', error);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -46,8 +50,9 @@ function History() {
 
   const handleResponseClick = (response: string) => {
     setSelectedResponse(response);
-
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="p-4 sm:p-6 bg-slate-100">
@@ -97,7 +102,8 @@ function History() {
       </div>
 
       <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
-      <OutputSection aiOutput={selectedResponse || ''} />      
+        { selectedResponse }
+      {/* <OutputSection aiOutput={selectedResponse || ''} />       */}
       </div>
 
     </div>
