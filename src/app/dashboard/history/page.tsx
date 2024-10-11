@@ -41,17 +41,20 @@ function History() {
   }, [user]);
 
   const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('Texto copiado al portapapeles!');
-    } catch (error) {
-      console.error('Error al copiar al portapapeles:', error);
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Texto copiado al portapapeles!');
+      } catch (error) {
+        console.error('Error al copiar al portapapeles:', error);
+      }
+    } else {
+      console.error('Clipboard API no está disponible');
     }
   };
 
   const handleResponseClick = (response: string) => {
     setSelectedResponse(response);
-
   };
 
   if (loading) return <Loading />;
