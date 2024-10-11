@@ -12,8 +12,8 @@ function Header() {
 
       <div>
         <h2 className='bg-primary p-1 px-4 rounded-full text-white h-full py-3'>
-          Rompe los limites por
-          <span className='font-semibold'> $4.99/Mes</span>
+          Recarga creditos desde
+          <span className='font-semibold'> $1 USD</span>
         </h2>
       </div>
 

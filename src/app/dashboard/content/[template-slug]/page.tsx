@@ -15,6 +15,7 @@ import { AIOutput } from '@/utils/schema';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { useRouter } from 'next/navigation';
 
+
 interface PROPS{
     params: {
         'template-slug': string
@@ -28,7 +29,7 @@ function CreateNewContent(props: PROPS) {
     const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
-    const { totalUsage } = useContext(TotalUsageContext);
+    const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
     const router = useRouter();
     
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -74,6 +75,8 @@ function CreateNewContent(props: PROPS) {
         createdAt: moment().format('DD/MM/yyyy'),
       })
       console.log(result);
+      const newTotalUsage = totalUsage + aiResp.length;
+      setTotalUsage(newTotalUsage);
     }
 
   return (

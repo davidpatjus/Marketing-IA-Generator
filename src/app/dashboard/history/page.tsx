@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button'; // Asegúrate de tener este componente
-import Modal from '@/components/ui/Modal'; // Importar el nuevo componente Modal
+import { Button } from '@/components/ui/button';
+import Loading from '@/components/ui/Loading';
+import OutputSection from '@/components/Content/OutputSection';
 
 export interface HISTORY {
   id: number;
@@ -18,8 +19,7 @@ function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
-  const [selectedResponse, setSelectedResponse] = useState<string | null>(null); // Para el modal
-  const [isModalOpen, setIsModalOpen] = useState(false); // Para controlar el estado del modal
+  const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,50 +50,63 @@ function History() {
   };
 
   const handleResponseClick = (response: string) => {
-    setSelectedResponse(response); // Mostrar respuesta completa en el modal
-    setIsModalOpen(true); // Abrir el modal
+    setSelectedResponse(response);
+
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
-    <div className="p-6 bg-white">
-      <h1 className="text-3xl font-bold ">HISTORIAL</h1>
-      <h2 className="text-gray-500 text-lg">Busca entre tu contenido anterior generado</h2>
-      <table className="min-w-full table-auto mt-4">
-        <thead>
-          <tr className='bg-gray-100 border'>
-            <th className="px-4 py-4 text-center">Plantilla</th>
-            <th className="px-4 py-4 text-center">Respuesta IA</th>
-            <th className="px-4 py-4 text-center">Fecha</th>
-            <th className="px-4 py-4 text-center">Letras</th>
-            <th className="px-4 py-4 text-center">Copiar</th>
-          </tr>
-        </thead>
-        <tbody>
-          {aiOutputs.map((output) => (
-            <tr key={output.id} className="text-center">
-              <td className="border-b px-4 py-3 font-medium uppercase max-w-xs">{output.templateSlug.replace(/-/g, ' ')}</td>
-              <td
-                className="border-b px-4 py-3 truncate max-w-xs cursor-pointer font-semibold"
-                onClick={() => handleResponseClick(output.aiResponse)}
-              >
-                {output.aiResponse}
-              </td>
-              <td className="border-b px-4 py-3 font-semibold">{output.createdAt}</td>
-              <td className="border-b px-4 py-3 font-semibold">{output.aiResponse.length}</td>
-              <td className="border-b px-4 py-3">
-                <Button onClick={() => copyToClipboard(output.aiResponse)}>Copiar</Button>
-              </td>
+    <div className="p-4 sm:p-6 bg-slate-100">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">HISTORIAL</h1>
+      <h2 className="text-gray-500 text-base sm:text-lg mb-4">Busca entre tu contenido anterior generado, toca en la respuesta para editarla</h2>
+      
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto border-collapse">
+          <thead className="bg-gray-300">
+            <tr>
+              <th className="px-4 py-2 text-left text-xs sm:text-sm">Plantilla</th>
+              <th className="px-4 py-2 text-left text-xs sm:text-sm">Respuesta IA</th>
+              <th className="px-4 py-2 text-left text-xs sm:text-sm">Fecha</th>
+              <th className="px-4 py-2 text-left text-xs sm:text-sm">Letras</th>
+              <th className="px-4 py-2 text-left text-xs sm:text-sm">Acción</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {aiOutputs.map((output) => (
+              <tr key={output.id} className="border-b bg-gray-100 hover:bg-gray-200">
+                <td 
+                  className="px-4 py-2 text-xs sm:text-sm font-medium uppercase cursor-pointer" 
+                  onClick={() => handleResponseClick(output.aiResponse)}
+                >
+                  {output.templateSlug.replace(/-/g, ' ')}
+                </td>
+                <td 
+                  className="px-4 py-2 text-xs sm:text-sm font-semibold cursor-pointer truncate max-w-[150px] sm:max-w-xs"
+                  onClick={() => handleResponseClick(output.aiResponse)}
+                >
+                  {output.aiResponse}
+                </td>
+                <td className="px-4 py-2 text-xs sm:text-sm">{output.createdAt}</td>
+                <td className="px-4 py-2 text-xs sm:text-sm">{output.aiResponse.length}</td>
+                <td className="px-4 py-2">
+                  <Button 
+                    onClick={() => copyToClipboard(output.aiResponse)}
+                    className="text-xs sm:text-sm px-2 py-1 sm:px-4 sm:py-2 cursor-pointer"
+                  >
+                    Copiar
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Modal para mostrar la respuesta completa */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p className="mt-4">{selectedResponse}</p>
-      </Modal>
+      <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
+      <OutputSection aiOutput={selectedResponse || ''} />      
+      </div>
+
     </div>
   );
 }

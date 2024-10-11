@@ -3,9 +3,12 @@ import React, { useState } from 'react'
 import SearchSection from '../../components/Dashboard/SearchSection';
 import TemplateSection from '@/components/Dashboard/TemplateSection';
 
+
+
 function Dashboard() {
 
   const [userSearchInput, setUserSearchInput] = useState<string>('');
+
 
   return (
     <div>
