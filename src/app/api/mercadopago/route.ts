@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MercadoPagoConfig, Preference } from "mercadopago";
-// eslint-disable-next-line no-unused-vars
-export async function POST(req: NextRequest, res: NextResponse) {
+
+export async function POST(req: NextRequest) {
 
 	// Configura el token de acceso desde tus variables de entorno
 	const client = new MercadoPagoConfig({
