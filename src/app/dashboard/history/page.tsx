@@ -39,11 +39,16 @@ function History() {
   }, [user]);
 
   const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('Texto copiado al portapapeles!');
-    } catch (error) {
-      console.error('Error al copiar al portapapeles:', error);
+    // Asegurarse de que esté en el cliente antes de acceder a 'navigator'
+    if (typeof window !== 'undefined' && navigator?.clipboard) {
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Texto copiado al portapapeles!');
+      } catch (error) {
+        console.error('Error al copiar al portapapeles:', error);
+      }
+    } else {
+      console.error('Clipboard API no disponible');
     }
   };
 
@@ -51,7 +56,7 @@ function History() {
 
   function handleResponseClick(aiResponse: string): void {
     setSelectedAIResponse(aiResponse); // Set the selected response
-    }
+  }
 
   return (
     <div className="p-4 sm:p-6 bg-slate-100">
