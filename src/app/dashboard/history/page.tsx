@@ -18,14 +18,8 @@ export interface HISTORY {
 function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
   const [loading, setLoading] = useState(true);
-  const { setSelectedAIResponse } = useContext(SelectedAIResponseContext);
+  const { selectedAIResponse, setSelectedAIResponse } = useContext(SelectedAIResponseContext);
   const { user } = useUser();
-  const [isClient, setIsClient] = useState(false); // Estado para saber si estamos en el cliente
-
-  useEffect(() => {
-    // Esto asegura que estamos en el cliente y habilita el acceso a `navigator`
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,35 +36,24 @@ function History() {
         }
       }
     };
-
     fetchData();
   }, [user]);
 
   const copyToClipboard = async (text: string) => {
-    // Envolver la lógica de copiar en un useEffect, pero invocar la función al hacer clic
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      if (isClient && navigator?.clipboard) {
-        const copy = async () => {
-          try {
-            await navigator.clipboard.writeText(text);
-            alert('Texto copiado al portapapeles!');
-          } catch (error) {
-            console.error('Error al copiar al portapapeles:', error);
-          }
-        };
-        copy();
-      } else {
-        console.error('Clipboard API no disponible');
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isClient, text]);
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Texto copiado al portapapeles!');
+    } catch (error) {
+      console.error('Error al copiar al portapapeles:', error);
+    }
   };
+      
 
   if (loading) return <Loading />;
 
   function handleResponseClick(aiResponse: string): void {
-    setSelectedAIResponse(aiResponse); // Set the selected response
+    console.log("SelectedAIResponse:", selectedAIResponse);
+    setSelectedAIResponse(aiResponse); 
   }
 
   return (
@@ -121,11 +104,9 @@ function History() {
       </div>
 
       <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
-        <div className="prose">
-          {setSelectedAIResponse && <ReactMarkdown>{setSelectedAIResponse}</ReactMarkdown>}
-        </div>
-
+          {selectedAIResponse && <ReactMarkdown>{selectedAIResponse}</ReactMarkdown>}
       </div>
+      
     </div>
   );
 }
