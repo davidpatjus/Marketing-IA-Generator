@@ -25,7 +25,8 @@ function OutputSection({ aiOutput }: PROPS) {
   }, [aiOutput, isClient]);
 
   const handleCopy = () => {
-    if (isClient) {
+    // Verificar si estamos en el cliente
+    if (typeof window !== 'undefined' && navigator?.clipboard) {
       const copyToClipboard = async (text: string) => {
         try {
           await navigator.clipboard.writeText(text);
@@ -36,6 +37,8 @@ function OutputSection({ aiOutput }: PROPS) {
       };
 
       copyToClipboard(editorRef.current.getInstance().getMarkdown());
+    } else {
+      console.error("La API de portapapeles no está disponible en el servidor.");
     }
   };
 
