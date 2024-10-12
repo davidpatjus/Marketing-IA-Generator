@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Loading from '@/components/ui/Loading';
@@ -102,8 +103,10 @@ function History() {
       </div>
 
       <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
-        { selectedResponse }
-      {/* <OutputSection aiOutput={selectedResponse || ''} />       */}
+        <div className="prose">
+          {selectedResponse && <ReactMarkdown>{selectedResponse}</ReactMarkdown>}
+        </div>
+
       </div>
 
     </div>

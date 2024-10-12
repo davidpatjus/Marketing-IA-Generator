@@ -13,6 +13,7 @@ import { useUser } from '@clerk/nextjs';
 import moment from 'moment'
 import { AIOutput } from '@/utils/schema';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
+import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
 import { useRouter } from 'next/navigation';
 
 
@@ -30,12 +31,13 @@ function CreateNewContent(props: PROPS) {
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
     const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
+    const { totalCredits } = useContext(TotalCreditsContext)
     const router = useRouter();
     
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const generateAIContent = async (formData: any) => {
 
-      if (totalUsage >= 10000) {
+      if (totalUsage >= totalCredits) {
         alert("Has utilizado el maximo de creditos disponibles. Por favor, actualiza tu plan.");
         router.push('/dashboard/billing');
         return;
