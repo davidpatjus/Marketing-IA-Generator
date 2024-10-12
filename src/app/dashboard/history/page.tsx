@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useContext, useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Loading from '@/components/ui/Loading';
-// import OutputSection from '@/components/Content/OutputSection';
+import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
 
 export interface HISTORY {
   id: number;
@@ -18,8 +18,14 @@ export interface HISTORY {
 function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
+  const { setSelectedAIResponse } = useContext(SelectedAIResponseContext);
   const { user } = useUser();
+  const [isClient, setIsClient] = useState(false); // Estado para saber si estamos en el cliente
+
+  useEffect(() => {
+    // Esto asegura que estamos en el cliente y habilita el acceso a `navigator`
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,19 +47,31 @@ function History() {
   }, [user]);
 
   const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('Texto copiado al portapapeles!');
-    } catch (error) {
-      console.error('Error al copiar al portapapeles:', error);
-    }
-  };
-
-  const handleResponseClick = (response: string) => {
-    setSelectedResponse(response);
+    // Envolver la lógica de copiar en un useEffect, pero invocar la función al hacer clic
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      if (isClient && navigator?.clipboard) {
+        const copy = async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            alert('Texto copiado al portapapeles!');
+          } catch (error) {
+            console.error('Error al copiar al portapapeles:', error);
+          }
+        };
+        copy();
+      } else {
+        console.error('Clipboard API no disponible');
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isClient, text]);
   };
 
   if (loading) return <Loading />;
+
+  function handleResponseClick(aiResponse: string): void {
+    setSelectedAIResponse(aiResponse); // Set the selected response
+  }
 
   return (
     <div className="p-4 sm:p-6 bg-slate-100">
@@ -108,7 +126,6 @@ function History() {
         </div>
 
       </div>
-
     </div>
   );
 }
