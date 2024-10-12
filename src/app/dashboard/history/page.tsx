@@ -27,7 +27,6 @@ function History() {
         try {
           const response = await fetch(`/api/aiOutputs?createdBy=${user.primaryEmailAddress?.emailAddress}`);
           const data = await response.json();
-          console.log(data);
           setAiOutputs(data);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -52,7 +51,6 @@ function History() {
   if (loading) return <Loading />;
 
   function handleResponseClick(aiResponse: string): void {
-    console.log("SelectedAIResponse:", selectedAIResponse);
     setSelectedAIResponse(aiResponse); 
   }
 
