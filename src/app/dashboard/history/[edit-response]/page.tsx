@@ -1,5 +1,5 @@
 import React from 'react'
-import OutputSection from '@/components/Content/OutputSection'
+// import OutputSection from '@/components/Content/OutputSection'
 
 function EditResponse() {
   return (
