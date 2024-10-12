@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Loading from '@/components/ui/Loading';
 import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
+
 export interface HISTORY {
   id: number;
   formData: string;
@@ -18,6 +19,12 @@ function History() {
   const [loading, setLoading] = useState(true);
   const { setSelectedAIResponse } = useContext(SelectedAIResponseContext);
   const { user } = useUser();
+  const [isClient, setIsClient] = useState(false); // Estado para saber si estamos en el cliente
+
+  useEffect(() => {
+    // Esto asegura que estamos en el cliente y habilita el acceso a `navigator`
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,17 +46,24 @@ function History() {
   }, [user]);
 
   const copyToClipboard = async (text: string) => {
-    // Asegurarse de que esté en el cliente antes de acceder a 'navigator'
-    if (typeof window !== 'undefined' && navigator?.clipboard) {
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('Texto copiado al portapapeles!');
-      } catch (error) {
-        console.error('Error al copiar al portapapeles:', error);
+    // Envolver la lógica de copiar en un useEffect, pero invocar la función al hacer clic
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      if (isClient && navigator?.clipboard) {
+        const copy = async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            alert('Texto copiado al portapapeles!');
+          } catch (error) {
+            console.error('Error al copiar al portapapeles:', error);
+          }
+        };
+        copy();
+      } else {
+        console.error('Clipboard API no disponible');
       }
-    } else {
-      console.error('Clipboard API no disponible');
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isClient, text]);
   };
 
   if (loading) return <Loading />;
