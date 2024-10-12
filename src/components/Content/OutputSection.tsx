@@ -37,6 +37,7 @@ function OutputSection({ aiOutput }: PROPS) {
         <Button
           className="flex gap-2"
           onClick={() => {
+            'use client';
             const copyToClipboard = async (text: string) => {
               try {
                 await navigator.clipboard.writeText(text);
