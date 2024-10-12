@@ -1,4 +1,3 @@
-'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
@@ -38,18 +37,17 @@ function OutputSection({ aiOutput }: PROPS) {
         <Button
           className="flex gap-2"
           onClick={() => {
-            const copyToClipboard = (text: string) => {
-              const tempTextArea = document.createElement("textarea");
-              tempTextArea.value = text;
-              document.body.appendChild(tempTextArea);
-              tempTextArea.select();
-              document.execCommand("copy");
-              document.body.removeChild(tempTextArea);
-              alert('Texto copiado al portapapeles!');
+            const copyToClipboard = async (text: string) => {
+              try {
+                await navigator.clipboard.writeText(text);
+                alert('Texto copiado al portapapeles!');
+              } catch (error) {
+                console.error('Error al copiar al portapapeles:', error);
+              }
             };
+          
 
             copyToClipboard(editorRef.current.getInstance().getMarkdown());
-            alert('Copiado al portapapeles');
           }}
         >
           <Copy className="w-4 h-4" /> Copiar

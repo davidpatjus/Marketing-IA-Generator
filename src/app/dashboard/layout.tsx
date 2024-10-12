@@ -4,6 +4,7 @@ import SideNav from '../../components/Dashboard/SideNav';
 import Header from '../../components/Dashboard/Header';
 import { TotalUsageContext } from '../(context)/TotalUsageContext';
 import { TotalCreditsContext } from '../(context)/TotalCreditsContext';
+import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
 import { useUser } from '@clerk/nextjs';
 import Loading from '@/components/ui/Loading';
 
@@ -18,6 +19,8 @@ function Layout({
   const [loading, setLoading] = useState(true);
   const [totalUsage, setTotalUsage] = useState<number>(0);
   const [totalCredits, setTotalCredits] = useState<number>(0);
+  const [ selectedAIResponse, setSelectedAIResponse ] = useState<string>('');
+
 
   useEffect(() => {
     const getUserData = async () => {
@@ -58,6 +61,7 @@ function Layout({
   return (
     <TotalUsageContext.Provider value={{totalUsage,setTotalUsage}}>
     <TotalCreditsContext.Provider value={{totalCredits,setTotalCredits}}>
+    <SelectedAIResponseContext.Provider value={{selectedAIResponse, setSelectedAIResponse}}>
       <div className='bg-slate-100 h-full overflow-y-auto'>
         <div className='md:w-64 hidden md:block fixed'>
           <SideNav />
@@ -67,6 +71,7 @@ function Layout({
         {children}
         </div>
       </div>
+    </SelectedAIResponseContext.Provider>
     </TotalCreditsContext.Provider>
     </TotalUsageContext.Provider>
   )
