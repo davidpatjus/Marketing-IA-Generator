@@ -1,4 +1,4 @@
-'use client'
+'use strict';
 import OutputSection from '@/components/Content/OutputSection';
 import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
 import React, { useState } from 'react';
