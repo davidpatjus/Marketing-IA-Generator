@@ -15,7 +15,6 @@ import { AIOutput } from '@/utils/schema';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
 import { useRouter } from 'next/navigation';
-import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
 
 
 interface PROPS{
@@ -28,8 +27,7 @@ function CreateNewContent(props: PROPS) {
 
     const selectedTemplate:TEMPLATE|undefined = templates?.find(template => template.slug === props.params['template-slug']);
 
-    const { totalCredits } = useContext(TotalCreditsContext);
-     const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
     const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);

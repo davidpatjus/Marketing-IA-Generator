@@ -122,7 +122,7 @@ function History() {
 
       <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
         <div className="prose">
-          {selectedResponse && <ReactMarkdown>{selectedResponse}</ReactMarkdown>}
+          {setSelectedAIResponse && <ReactMarkdown>{setSelectedAIResponse}</ReactMarkdown>}
         </div>
 
       </div>
