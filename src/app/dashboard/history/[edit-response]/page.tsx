@@ -1,8 +1,11 @@
 import React from 'react'
+import OutputSection from '@/components/Content/OutputSection'
 
 function EditResponse() {
   return (
-    <div>EditResponse</div>
+    <div>
+        <OutputSection aiOutput='' />
+    </div>
   )
 }
 
