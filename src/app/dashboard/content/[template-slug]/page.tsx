@@ -14,6 +14,7 @@ import moment from 'moment'
 import { AIOutput } from '@/utils/schema';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { useRouter } from 'next/navigation';
+import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
 
 
 interface PROPS{
@@ -26,7 +27,8 @@ function CreateNewContent(props: PROPS) {
 
     const selectedTemplate:TEMPLATE|undefined = templates?.find(template => template.slug === props.params['template-slug']);
 
-    const [loading, setLoading] = useState(false);
+    const { totalCredits } = useContext(TotalCreditsContext);
+     const [loading, setLoading] = useState(false);
     const [aiOutput, setAiOutput] = useState<string>('');
     const { user } = useUser();
     const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
@@ -35,7 +37,7 @@ function CreateNewContent(props: PROPS) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const generateAIContent = async (formData: any) => {
 
-      if (totalUsage >= 10000) {
+      if (totalUsage >= totalCredits) {
         alert("Has utilizado el maximo de creditos disponibles. Por favor, actualiza tu plan.");
         router.push('/dashboard/billing');
         return;
@@ -99,7 +101,7 @@ function CreateNewContent(props: PROPS) {
 
           {/* OutputSection */}
           <div className='col-span-2'>
-            <OutputSection aiOutput={aiOutput} />
+            <OutputSection aiOutput={aiOutput || ''} />
           </div>
 
       </div>

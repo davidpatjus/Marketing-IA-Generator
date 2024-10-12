@@ -1,10 +1,9 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Loading from '@/components/ui/Loading';
-import OutputSection from '@/components/Content/OutputSection';
-
+import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
 export interface HISTORY {
   id: number;
   formData: string;
@@ -17,7 +16,7 @@ export interface HISTORY {
 function History() {
   const [aiOutputs, setAiOutputs] = useState<HISTORY[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedResponse, setSelectedResponse] = useState<string | null>(null);
+  const { setSelectedAIResponse } = useContext(SelectedAIResponseContext);
   const { user } = useUser();
 
   useEffect(() => {
@@ -39,21 +38,20 @@ function History() {
     fetchData();
   }, [user]);
 
-  const copyToClipboard = (text: string) => {
-    const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = text;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempTextArea);
-    alert('Texto copiado al portapapeles!');
-  };
-
-  const handleResponseClick = (response: string) => {
-    setSelectedResponse(response);
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Texto copiado al portapapeles!');
+    } catch (error) {
+      console.error('Error al copiar al portapapeles:', error);
+    }
   };
 
   if (loading) return <Loading />;
+
+  function handleResponseClick(aiResponse: string): void {
+    setSelectedAIResponse(aiResponse); // Set the selected response
+    }
 
   return (
     <div className="p-4 sm:p-6 bg-slate-100">
@@ -101,11 +99,6 @@ function History() {
           </tbody>
         </table>
       </div>
-
-      <div className='m-2 md:m-4 md:p-4 shadow-xl rounded-md bg-slate-200'>
-      <OutputSection aiOutput={selectedResponse || ''} />      
-      </div>
-
     </div>
   );
 }
