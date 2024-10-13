@@ -12,20 +12,20 @@ export default function Loading() {
   }, [])
 
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-100 ">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-purple-500 via-purple-700 to-purple-900 ">
      <div className="text-center">
         <div className="flex space-x-2 mb-4">
           {[0, 1, 2].map((index) => (
             <div
               key={index}
-              className="w-4 h-4 rounded-full bg-black"
+              className="w-4 h-4 rounded-full bg-white/50"
               style={{
                 animation: `pulse 1.5s infinite ${index * 0.15}s`,
               }}
             ></div>
           ))}
         </div>
-        <p className="text-black text-xl font-semibold">Loading{dots}</p>
+        <p className="text-white text-xl font-semibold">Loading{dots}</p>
       </div>
       <style >{`
         @keyframes pulse {

@@ -8,6 +8,7 @@ import { eq } from 'drizzle-orm';
 import { HISTORY } from '@/app/dashboard/history/page';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
+import Link from 'next/link';
 
 
  function UsageTrack() {
@@ -61,7 +62,9 @@ import { TotalCreditsContext } from '@/app/(context)/TotalCreditsContext';
             </div>
             <h2 className='text-sm my-2'>{ totalUsage }/{totalCredits} Creditos Usados</h2>
         </div>
-        <Button variant={'secondary'} className='w-full my-3 p-4 font-bold text-primary text-lg'>Recargar</Button>
+		<Link href='/dashboard/billing'>
+        	<Button variant={'secondary'} className='w-full my-3 p-4 font-bold text-primary text-lg'>Recargar</Button>
+		</Link>
     </div>
   )
 }

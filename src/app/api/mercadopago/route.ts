@@ -14,23 +14,51 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Método no permitido" }, { status: 405 });
   }
 
-	try {
+  try {
+    const { creditOption } = await req.json(); // Recibe la opción de recarga desde el frontend
+    
+    let unitPrice = 0;
+    let title = "";
+    
+    // Define los diferentes precios y títulos según la opción de recarga
+    switch (creditOption) { 
+      case '10000':
+        unitPrice = 4900;
+        title = "Recarga de 10000 Créditos";
+        break;
+      case '20000':
+        unitPrice = 7900;
+        title = "Recarga de 20000 Créditos";
+        break;
+      case '50000':
+        unitPrice = 15900;
+        title = "Recarga de 50000 Créditos";
+        break;
+      default:
+        return NextResponse.json({ error: "Opción de recarga inválida" }, { status: 400 });
+    } 
+  
       // Crea la preferencia con los detalles del producto
       const response = await preference.create({
         body: {
           payment_methods: {
             excluded_payment_methods: [],
             excluded_payment_types: [],
-            installments: 2, // Máximo número de cuotas permitidas
+            installments: 1, // Máximo número de cuotas permitidas
           },
           items: [
             {
-              title: "Recarga_creditos",
+              title, // Título del producto
               quantity: 1,
-              unit_price: 4900, // Precio del producto
-              id: "19770510", // ID del producto
+              unit_price: unitPrice, // Precio del producto
+              id: "creditsAIMarketer", // ID del producto
             },
           ],
+          metadata: {
+            title, // Título del producto
+            creditOption, // Opción de recarga
+            unitPrice, // Precio unitario
+          }
         },
       });
 
