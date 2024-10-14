@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { creditOption } = await req.json(); // Recibe la opción de recarga desde el frontend
+    const { creditOption, userID } = await req.json(); // Recibe la opción de recarga desde el frontend
     
     let unitPrice = 0;
     let title = "";
@@ -58,11 +58,22 @@ export async function POST(req: NextRequest) {
             title, // Título del producto
             creditOption, // Opción de recarga
             unitPrice, // Precio unitario
-          }
+            userID, // ID del usuario
+          },
+          redirect_urls: {
+            success: "/dashboard", // URL de redirección en caso de éxito
+            failure: "/dashboard", // URL de redirección en caso de fallo
+            pending: "/dashboard", // URL de redirección en caso de pago pend
+          },
+          back_urls: {
+            success: "/dashboard", // URL de redirección en caso de éxito
+            failure: "/dashboard", // URL de redirección en caso de fallo
+            pending: "/dashboard", // URL de redirección en caso de pago pend  
+          },
+          auto_return: "approved", // Redirige automáticamente al usuario al completar el pago
         },
       });
 
-			console.log(response)
       const preferenceId = response.id;
 
 			// Enviar el preferenceId al frontend

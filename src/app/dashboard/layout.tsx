@@ -5,6 +5,7 @@ import Header from '../../components/Dashboard/Header';
 import { TotalUsageContext } from '../(context)/TotalUsageContext';
 import { TotalCreditsContext } from '../(context)/TotalCreditsContext';
 import { SelectedAIResponseContext } from '@/app/(context)/SelectedAIResponse';
+import { currentUserID } from '../(context)/currentUserID';
 import { useUser } from '@clerk/nextjs';
 import Loading from '@/components/ui/Loading';
 
@@ -20,6 +21,7 @@ function Layout({
   const [totalUsage, setTotalUsage] = useState<number>(0);
   const [totalCredits, setTotalCredits] = useState<number>(0);
   const [ selectedAIResponse, setSelectedAIResponse ] = useState<string>('');
+  const [ userID, setUserID ] = useState<number>(0);
 
 
   useEffect(() => {
@@ -43,6 +45,7 @@ function Layout({
           const data = await response.json();
           console.log('User Data:', data);
           
+          setUserID(data.id);  // Actualizar el ID del usuario desde la respuesta
           setTotalUsage(data.credits || 0);  // Actualizar el uso total desde la respuesta
           setTotalCredits(data.maxCreditUsage || 0);  // Actualizar los créditos totales desde la respuesta
         } catch (error) {
@@ -62,6 +65,7 @@ function Layout({
     <TotalUsageContext.Provider value={{totalUsage,setTotalUsage}}>
     <TotalCreditsContext.Provider value={{totalCredits,setTotalCredits}}>
     <SelectedAIResponseContext.Provider value={{selectedAIResponse, setSelectedAIResponse}}>
+    <currentUserID.Provider value={{userID, setUserID}}>
       <div className='bg-slate-100 h-full overflow-y-auto'>
         <div className='md:w-64 hidden md:block fixed'>
           <SideNav />
@@ -71,6 +75,7 @@ function Layout({
         {children}
         </div>
       </div>
+    </currentUserID.Provider>
     </SelectedAIResponseContext.Provider>
     </TotalCreditsContext.Provider>
     </TotalUsageContext.Provider>

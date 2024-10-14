@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { currentUserID } from '@/app/(context)/currentUserID';
 import { CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -17,6 +18,7 @@ const creditOptions = [
 const Billing = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const [creditOption, setCreditOption] = useState('10000');
+  const { userID } = useContext(currentUserID);
   
   
   useEffect(() => {
@@ -33,14 +35,14 @@ const Billing = () => {
 
 const fetchPreferenceId = async () => {
   if (!creditOption) return; // Verifica que hay un valor válido de `creditOption`
-
+  
   try {
     const response = await fetch('/api/mercadopago', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ creditOption }),
+      body: JSON.stringify({ creditOption, userID }),
     });
     const data = await response.json();
     setPreferenceId(data.preferenceId);
